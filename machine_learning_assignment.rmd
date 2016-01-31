@@ -1,0 +1,147 @@
+---
+title: "practical machine learning assignment"
+author: "Benjamin Knöferl"
+date: "29. Januar 2016"
+output: html_document
+---
+
+
+Loading important packages: 
+
+```{r}
+library(caret)
+library(randomForest)
+```
+
+
+### Getting and Cleaning Data
+
+First step: reading the data. Since the data quality is not perfect, it's very important to do some data cleaning process.
+Most of the variables are seen as factor variables where one of the levels is "". Sometimes, missing values are again described as factor "NA", and in a few cases, calculations are wrong and the value is assigned as "#DIV/0!".
+Knowing this, it is very important to adjust how to read the data:
+
+```{r}
+setwd("C:\\Users\\bknoeferl\\Desktop\\machine")
+
+train <- read.csv2("training_data.csv", sep=",", na.strings=c("#DIV/0!", "", "NA"))
+test <- read.csv2("C:\\Users\\bknoeferl\\Desktop\\machine\\test_data.csv", sep=",", na.strings=c("#DIV/0!", "", "NA"))
+```
+
+
+
+Now, we can delete some variables which are not helpful. Those are columns 1:7 (Usernames, windows, timestamps):
+
+```{r}
+train <- train[,-c(1:7)]
+```
+
+Now we can check, which columns contain how many missing values:
+
+```{r}
+for (Var in names(train)) {
+  missing <- sum(is.na(train[,Var]))
+  if (missing > 0) {
+    print(c(Var,missing))
+  }
+}
+```
+
+Since all of those columns contain a huge amount of NA's, I decided not to use them as predictors but rather delete them 
+
+```{r}
+train <- train[,colSums(is.na(train)) < 1]
+```
+
+A second point, to take into consideration is the fact, that many of the variables are defined as factor. I decided to assign all variables as numeric (expect of variable classe)
+
+```{r}
+for(i in 1:52) {
+  train[,i] <- as.numeric(as.character(train[,i]))
+  }
+```
+
+
+Now, the test dataframe should contain only the variables of train expect of classe
+
+```{r}
+test_names <- names(train)[1:52]
+test <- test[, test_names]
+```
+
+The variables of test dataframe also have to be assigned as numeric
+
+```{r}
+for(i in 1:51) {
+  test[,i] <- as.numeric(as.character(test[,i]))
+}
+```
+
+
+### Model building
+
+using the caret package we can now divide the train dataset into training and testing datasets (with probability of 75% for training)
+
+```{r}
+inTrain <- createDataPartition(y=train$classe, p=0.75, list=FALSE )
+training <- train[inTrain,]
+testing <- train[-inTrain,]
+```
+
+In order to find out the best number of variable per level, we use cross validation: 
+
+
+```{r}
+set.seed(1234)
+
+fit_control = trainControl( method = "cv", number = 2)
+
+cross_validation <- train(classe ~ ., data = training, method = "rf", 
+            trControl = fit_control)
+cross_validation$bestTune$mtry # 2
+
+cross_validation
+```
+
+Now. we can start with the Random Forest by using cross_validation$bestTune$mtry as the ideal mtry input for the randomForest function.
+
+```{r}
+RF <- randomForest(classe ~ ., data = training, 
+                            mtry = cross_validation$bestTune$mtry)
+
+predictRF <- predict(RF)
+table(predictRF, training$classe)
+```
+
+
+since this looks in a first step very good, we can directly predict our testing data
+
+```{r}
+predictions <- predict(RF, newdata = testing)
+```
+
+Now we can use the function confusionMatrix, to have a feeling if our model fits good to the testing data. 
+(the out of sample error is for example the error you get on a new data set)
+
+```{r}
+confusionMatrix(predictions, testing$classe)
+```
+
+
+Now let's take a look at the provided test data, if it fits for this new data also good.
+
+```{r}
+results <- predict(RF, newdata=test)
+results 
+confusionMatrix(predictions, testing$classe)
+```
+
+
+
+The prediction worked very well identifying new observations. 19 of 20 were assigned correctly. 
+That means the prediction model has an estimated out of sample error of 19/20. 
+
+
+
+
+
+

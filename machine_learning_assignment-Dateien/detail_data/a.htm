@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="js"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Dereframer</title>
+<meta charset="utf-8">
+<style>
+    iframe {
+            border: 0px;
+            margin: 0px;
+            padding: 0px;
+            top: 0px;
+            left: 0px;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+    }
+</style>
+</head>
+<body>
+<script src="detail_data/eic_002.js"></script>
+<script>
+(function(eic){
+    // find and remove scrollable parameter
+    var scrollable = false;
+    var search = location.search;
+    if (/([?&])scrollable=([^&]+)(&?)/.test(location.search)) {
+       scrollable = RegExp.$2.toLowerCase() == 'true';
+       sep = RegExp.$3 == '' ? '' : RegExp.$1;
+       search = location.search.replace(/[?&]scrollable=[^&]+&?/g, sep);
+    }
+
+    var url = location.protocol + '/' + location.pathname + search;
+
+    // backward compatibility: decode eic param to hash - if any
+    if (/[?&]eic=%23/.test(location.search)) {
+        var hash = location.search.replace(/.*[?&]eic=(%23.+)$/, function(full, decode) {
+            return decodeURIComponent(decode);
+        });
+        location.replace(hash);
+    }
+
+    // if we're not in an iframe, make a JS redirect (overwriting the history)
+    if (window === window.parent && url) {
+          return location.replace(url + location.hash);
+    }
+
+    if (!eic) { return; }
+
+    function messager(ev) {
+          if (!ev || !ev.data) { return; }
+
+          var msg = ev.data.replace(/^.*#id=0#/, '');
+
+          if (ev.source == eic.frames[0].contentWindow) {
+                 eic.send(msg);
+          } else {
+                 eic.send(msg, eic.frames[0].src, eic.frames[0].contentWindow);
+          }
+    }
+    window.addEventListener ? window.addEventListener('message', messager, false) : window.attachEvent('onmessage', messager);
+
+    var frame = document.createElement('iframe');
+    frame.setAttribute('frameborder', '0');
+    if (!scrollable) { frame.setAttribute('scrolling', 'no'); }
+    frame.src = url + '#' + com.unitedinternet.eic.params({ id: com.unitedinternet.eic.frames.length, url: location.href.replace(/#.*$/, '') });
+    eic.frames[0] = frame;
+    eic.frames[999] = { src: eic.params().url };
+    document.body.appendChild(frame);
+
+})(((com || []).unitedinternet || []).eic);
+</script><iframe src="a_data/a.htm" scrolling="no" frameborder="0"></iframe>
+
+
+</body></html>

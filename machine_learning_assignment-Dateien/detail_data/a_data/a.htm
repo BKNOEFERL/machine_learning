@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title></title>
+<meta charset="utf-8">
+<script src="a_data/wpth.js"></script>
+</head>
+<body style="background-color:transparent;margin:0;padding:0">
+<uim:ad xmlns:uim="urn:publicid:-:UIM:adinfo" cuid="22058" cid="238824" bid="638350" wpid="22058" flightid="238824" adid="638350" site="gmx" region="de" category="mail" section="freemail/3cmail_fm/mail/detail" tagid="sky_right" width="160" height="600" adsize="160x600" ext="appnexus"></uim:ad>
+<script>
+    if (window.AdService && typeof AdService.adMeta === 'function') {
+        AdService.adMeta({
+            cuid: '22058',
+            cid: '238824',
+            bid: '638350',
+            site: 'gmx',
+            region: 'de',
+            category: 'mail',
+            section: 'freemail/3cmail_fm/mail/detail',
+            tagid: 'sky_right',
+            width: '160',
+            height: '600',
+            adsize: '160x600',
+            ovkid: ''
+        });
+    }
+</script> <script>
+(function () {
+	var placementid = getplacementid();
+	function getplacementid() {
+		var geschlecht = '', section = '';
+		if ('0' === '1') {
+			geschlecht = 'w';
+		} else if ('1' === '1') {
+			geschlecht = 'm';
+		}
+		if ('gmx' !== '1und1' && 'freemail/3cmail_fm/mail/detail'.match("^freemail/3cmail_fm") == 'freemail/3cmail_fm') {
+			section = 'inbox';
+		} else if ('gmx' !== '1und1' && ('freemail/3cmail_fm/mail/detail'.match("^freemail/navigator") == 'freemail/navigator' || 'freemail/3cmail_fm/mail/detail' === 'start')) {
+			section = 'start';
+		} else if ('freemail/3cmail_fm/mail/detail'.indexOf('topde') === 0) {
+			section = 'topde';
+		}
+		var category = ('mail' === 'shopping' || 'mail' === 'advertorial') ? 'magazine' : 'mail';
+		var params = 'gmx-de-'+category+'-'+section+'-'+geschlecht,
+			switcher;
+		switcher = {
+			'1und1-de-logout--m': '1609446',
+			'1und1-de-logout--w': '1609450',
+			'1und1-de-logout--': '1603274',
+			'1und1-de-magazine--m': '1609483',
+			'1und1-de-magazine--w': '1609490',
+			'1und1-de-magazine--': '1603261',
+			'1und1-de-mail--m': '1609497',
+			'1und1-de-mail--w': '1609503',
+			'1und1-de-mail--': '1603272',
+			'autoservice-de-homepage--m': '1737706',
+			'autoservice-de-homepage--w': '1737710',
+			'autoservice-de-homepage--': '1737703',
+			'autoservice-de-magazine--m': '1737729',
+			'autoservice-de-magazine--w': '1737738',
+			'autoservice-de-magazine--': '1737717',
+			'gmx-at-logout--m': '1609549',
+			'gmx-at-logout--w': '1609552',
+			'gmx-at-logout--': '1598873',
+			'gmx-at-magazine--m': '1609749',
+			'gmx-at-magazine--w': '1609831',
+			'gmx-at-magazine--': '1602554',
+			'gmx-at-mail-inbox-m': '4542296',
+			'gmx-at-mail-start-m': '4542613',
+			'gmx-at-mail--m': '1609933',
+			'gmx-at-mail-inbox-w': '4542303',
+			'gmx-at-mail-start-w': '4542615',
+			'gmx-at-mail--w': '1609938',
+			'gmx-at-mail-inbox-': '4542288',
+			'gmx-at-mail-start-': '4542611',
+			'gmx-at-mail--': '1602660',
+			'gmx-ch-logout--m': '1609983',
+			'gmx-ch-logout--w': '1610165',
+			'gmx-ch-logout--': '1598506',
+			'gmx-ch-magazine--m': '1610267',
+			'gmx-ch-magazine--w': '1610329',
+			'gmx-ch-magazine--': '1497038',
+			'gmx-ch-mail-inbox-m': '4543135',
+			'gmx-ch-mail-start-m': '4543108',
+			'gmx-ch-mail--m': '1610376',
+			'gmx-ch-mail-inbox-w': '4543139',
+			'gmx-ch-mail-start-w': '4543113',
+			'gmx-ch-mail--w': '1610379',
+			'gmx-ch-mail-inbox-': '4543134',
+			'gmx-ch-mail-start-': '4543103',
+			'gmx-ch-mail--': '1598725',
+			'gmx-de-logout--m': '1610407',
+			'gmx-de-logout--w': '1610410',
+			'gmx-de-logout--': '1598292',
+			'gmx-de-magazine--m': '1610619',
+			'gmx-de-magazine--w': '1610696',
+			'gmx-de-magazine--': '1610563',
+			'gmx-de-mail-inbox-m': '1610460',
+			'gmx-de-mail-start-m': '1610463',
+			'gmx-de-mail--m': '1610457',
+			'gmx-de-mail-inbox-w': '1610474',
+			'gmx-de-mail-start-w': '1610477',
+			'gmx-de-mail--w': '1610471',
+			'gmx-de-mail-inbox-': '1603030',
+			'gmx-de-mail-start-': '1603035',
+			'gmx-de-mail--': '1598460',
+			'topde-de-homepage--m': '1610488',
+			'topde-de-homepage--w': '1610497',
+			'topde-de-homepage--': '1603309',
+			'topde-de-magazine--m': '1610491',
+			'topde-de-magazine--w': '1610500',
+			'topde-de-magazine--': '1603316',
+			'webde-de-logout--m': '1609227',
+			'webde-de-logout--w': '1609224',
+			'webde-de-logout--': '1475751',
+			'webde-de-magazine--m': '1610804',
+			'webde-de-magazine--w': '1664463',
+			'webde-de-magazine--': '1475770',
+			'webde-de-mail-inbox-m': '1609698',
+			'webde-de-mail-start-m': '1609701',
+			'webde-de-mail--m': '1609693',
+			'webde-de-mail-inbox-w': '1609712',
+			'webde-de-mail-start-w': '1609716',
+			'webde-de-mail--w': '1609707',
+			'webde-de-mail-inbox-': '1602947',
+			'webde-de-mail-start-': '1602953',
+			'webde-de-mail--': '1475779',
+			'1und1-de-magazine-topde': '5038675',
+			'1und1-de-magazine-topde-m': '5038678',
+			'1und1-de-magazine-topde-w': '5038681',
+			'gmx-at-magazine-topde-': '5038662',
+			'gmx-at-magazine-topde-m': '5038665',
+			'gmx-at-magazine-topde-w': '5038668',
+			'gmx-ch-magazine-topde-': '5038636',
+			'gmx-ch-magazine-topde-m': '5038639',
+			'gmx-ch-magazine-topde-w': '5038642',
+			'gmx-de-magazine-topde-': '5038601',
+			'gmx-de-magazine-topde-m': '5038604',
+			'gmx-de-magazine-topde-w': '5038607',
+			'webde-de-magazine-topde-': '5038562',
+			'webde-de-magazine-topde-m': '5038566',
+			'webde-de-magazine-topde-w': '5038571'
+		}[params] || '4544241';
+		return switcher;
+	}
+	var pr = {
+		id: placementid,
+		cb: '6246050808352210948',
+		PT1: 'bce7ec518646673d8d88a25564c66026',
+		PT2: '22058',
+		T216: '',
+		T218: '',
+		T740: '',
+		T790: '',
+		T800: '',
+		T1323: '27',
+		T1330: '0',
+		T1331: '1',
+		T1534: '',
+		T3580: '',
+		T3558: '',
+		T3559: '',
+		T3560: '',
+		T3561: '',
+		T3562: '',
+		T3563: '',
+		T1429: '1',
+		T1422: '',
+		T1446: '',
+		T3594: '',
+		T3595: '',
+		T3596: '',
+		T3597: '',
+		T3598: '',
+		T3599: '3',
+		T3600: '',
+		T3601: '',
+		T3602: '',
+		T3603: '',
+		T3716: '',
+		T3719: '',
+		T3722: '',
+		T3725: '',
+		T3728: '',
+		T3716: '',
+		T3719: '',
+		T3722: '',
+		T4367: '',
+		T4916: '1',
+		T4917: '136',
+		T4918: '24789',
+		T4919: '',
+		T4920: '',
+		T4921: '',
+		T4922: '1',
+		T4923: '',
+		T4924: '',
+		T4925: '',
+		T4926: '',
+		T4927: '',
+		T4928: '',
+		T4929: '',
+		T4930: '',
+		T4931: '',
+		T4932: '',
+		T4933: '',
+		T4934: '',
+		T4935: '',
+		T4896: '',
+		T4897: '',
+		T4898: '',
+		T4899: '',
+		T4900: '',
+		T4901: '',
+		T4902: '',
+		T4903: '',
+		T4904: '',
+		T4905: '',
+		T4906: '',
+		T4907: '',
+		T4908: '1',
+		T4909: '',
+		T4910: '',
+		T4911: '3',
+		T4912: '',
+		T4913: '4',
+		T4914: '8',
+		T4915: '67809',
+		T4947: '',
+		T4948: '',
+		T4949: '',
+		T4950: '',
+		T4951: '',
+		T4952: '',
+		T4953: '',
+		T4954: '',
+		T4955: '',
+		oidazipfi: '',
+		sys: '',
+		secure: 'yes',
+		owner: 'all',
+		serious: '',
+		referrer: window.parent !== window.self && encodeURIComponent(document.referrer),
+		size: '160x600',
+		promo_alignment: 'center',
+		promo_sizes: '120x600',
+		tagidd: 'sky_right',
+		section: 'freemail/3cmail_fm/mail/detail'
+	}, p, pa = '', sn = 'ib';
+	for (p in pr) {
+		if (pr.hasOwnProperty(p) && pr[p]) {
+			if (p !== 'id') {pa += '&';}
+			pa += p + '=' + pr[p];
+		}
+	}
+	if (pr.secure === 'yes') {
+		sn = 'secure';
+	}
+	if (window.parent !== window.self) {
+		pa += '&referrer=' + encodeURIComponent(document.referrer);
+	}
+	if ('mail' !== 'mail') {
+		document.write('<iframe src="//' + sn + '.adnxs.com/tt?' + pa + '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0" allowtransparency="true" width="160" height="600"><\/iframe>');
+	} else {
+		document.write('<script	src="//' + sn + '.adnxs.com/ttj?' + pa + '"><\/script>');
+	}
+}());
+</script><script src="a_data/ttj"></script>
+<script>
+	if('mail' == 'mail' && 'freemail/3cmail_fm/mail/detail' !== 'freemail/3cmail_fm/nologout'){
+		var adnxssizes = '800x250,970x250,300x600';
+		var adnxssite = {'webde-de': 'web.de','gmx-de': 'www.gmx.net','gmx-ch': 'www.gmx.ch','gmx-at': 'www.gmx.at'}['gmx-de'] || 'www.gmx.net';
+		var adnxsplace = {'webde-de': '5257659','gmx-de': '5300691','gmx-ch': '5635108','gmx-at': '5635112'}['gmx-de'] || '5257659';
+		if('gmxde' === 'gmxch'){ adnxssizes+=',994x250'; }
+		function adnxstoken(data) {
+			if(data.result.cpm && data.result.ad && data.result.width && data.result.height){
+				var adnxssize, adnxssizelong = data.result.width+'x'+data.result.height, adnxsexpires = new Date(new Date().getTime() + (60*1000)).toGMTString(), dealid = 0;
+				adnxssize = {'300x250': '210','800x250': '212','970x250': '213','160x600': '214','120x600': '215','300x600': '216','728x90': '217','640x480': '218','994x250': '219'}[adnxssizelong] || '0';
+				document.cookie = 'NGANXP = ' + data.result.cpm + '; domain=.uimserv.net; expires=' + adnxsexpires + '; path=/';
+				document.cookie = 'NGANXSU = ' + adnxssize + ',' + data.result.ad + '; domain=.uimserv.net; expires=' + adnxsexpires + '; path=/';
+				if(typeof data.result.deal_id === "number"){dealid = data.result.deal_id;}
+				(new Image()).src = '//uidbox.uimserv.net/cgi-bin/uid/AP/evtid=623&haID=bce7ec518646673d8d88a25564c66026&mediaID=638350&cid=22058&att1=' + data.result.cpm + '&att2=' + adnxssize + '&att3=' + dealid + '?r=' + adnxssite + '&d=6246050808352210948'; 
+			}
+		}
+		document.write('<script src="https://ib.adnxs.com/jpt?id=' + adnxsplace + '&size=640x480&promo_sizes=' + adnxssizes + '&callback=adnxstoken&referrer=https://' + adnxssite + '/"><\/script>');
+	}
+</script><script src="a_data/jpt"></script>
+
+</body></html>

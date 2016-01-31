@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Aufruf-Zählung</title>
+<script type="text/javascript">
+function isUndefined(obj) { return typeof(obj) == 'undefined'; }
+function isNull(obj)      { return obj === null; }
+function isNone(obj)      { return isUndefined(obj) || isNull(obj); }
+function isSet(obj)       { return !isNone(obj); }
+
+function isTrue(obj)      { return isSet(obj) && !!obj; }
+function isFalse(obj)     { return isSet(obj) &&  !obj; }
+
+MafoCookie = new function() {
+    this.serverUrl    = ''; //  adimg.uimserv.net/pixel_trans.gif?Pixel-URL, an die der Cookie angehaengt wird: '//adimg.uimserv.net/foo.gif?bla=blub&' + 'NGMafo=42:1,0,0,0:1234567890|...'
+    this.cookieName   = 'NGHourCount';   // Name des Mafo-Cookies
+    this.idCookieName = ''; // Name des NGUserID-Cookies
+    this.expireCookie = 365*86400;  // Laufzeit des Cookies
+    this.expireAd     =  90*86400;  // Laufzeit einer einzelnen Kampagne
+    this.cookie       = '';
+    this.idCookie     = '';
+    this.ads          = {'adids':[]};
+    this.getCookie = function() {
+        var cookies = document.cookie.split(/;\s*/);
+        for (var i=0; i<cookies.length; i++) {
+            var cook = cookies[i].split('=', 2);
+            if (unescape(cook[0]) == this.cookieName) {
+                this.cookie = unescape(cook[1]);
+            } else if (unescape(cook[0]) == this.idCookieName) {
+                this.idCookie = unescape(cook[1]);
+            }
+        }
+        var ads = this.cookie.split('|');
+        this.ads.adids = [];
+        for (var i=0; i<ads.length; i++) {
+            var p1 = ads[i].split(':', 3);
+            if (p1.length != 3) { continue; }
+            if (1000*p1[2] < (new Date()).getTime()-this.expireAd*1000) { continue; }
+            var p2 = p1[1].split(/[,.]/);
+            if (p2.length != 4) { continue; }
+            this.ads[p1[0]] = {
+                'view':  p2[0],
+                'click': p2[1],
+                'visit': p2[2],
+                'buy':   p2[3],
+                'modif': p1[2]
+            };
+            this.ads.adids.push(p1[0]);
+        }
+    }
+    this.getCookie();
+    
+    this.setCookie = function() {
+        var cookie = escape(this.cookieName)+'=';
+        var ads = [];
+        for (var i=0; i<this.ads.adids.length; i++) {
+            var ad = this.ads[this.ads.adids[i]];
+            ads.push(this.ads.adids[i]+':'+ad['view']+'.'+ad['click']+'.'+ad['visit']+'.'+ad['buy']+':'+ad['modif']);
+        }
+        cookie += ads.join('|');
+        this.cookie = cookie;
+        var date    = new Date();
+        date.setTime(date.getTime() + this.expireCookie*1000);
+        document.cookie = cookie + '; domain=.uimserv.net; path=/; expires='+date.toGMTString();
+        // this.sendToServer();
+    }
+    
+    this.sendToServer = function() {
+        (new Image()).src = this.serverUrl + this.cookie;
+    }
+    
+    this.generalAction = function(type, adid) {
+        if (isNone(adid)) { adid = Params.get('adid'); }
+        if (isNone(this.ads[adid])) {
+            this.ads[adid] = {
+                'view':  0,
+                'click': 0,
+                'visit': 0,
+                'buy':   0
+            }
+            this.ads.adids.push(adid);
+        }
+        this.ads[adid].modif = parseInt((new Date()).getTime() / 1000);
+        this.ads[adid][type] = (+this.ads[adid][type]) + 1;
+        this.setCookie();
+        return true;
+    }
+    this.viewAction = function(adid) {
+        return this.generalAction('view', adid);
+    }
+    this.clickAction = function(adid) {
+        return this.generalAction('click', adid);
+    }
+    this.visitAction = function(adid) {
+        return this.generalAction('visit', adid);
+    }
+    this.buyAction = function(adid) {
+        return this.generalAction('buy', adid);
+    }
+}
+
+var Params = new function() {
+    this.params = {};
+    this.init = function() {
+        var q = location.search;
+        if (q.substr(0,1)=='?') { q = q.substr(1); }
+        var temp = q.split('&');
+        for (var i=0; i<temp.length; i++) {
+            var p = temp[i].split('=', 2);
+            isSet(this.params[p[0]]) ? this.params[p[0]].push(p[1]) : this.params[p[0]] = [p[1]];
+        }
+    }
+    this.init();
+    this.get = function(name, defaultValue, forceList) {
+        if (isNone(name)) { return this.params; }
+        var result = this.params[name];
+        if (isNone(result)) { return isTrue(forceList) ? defaultValue.toList() : defaultValue; }
+        return isTrue(forceList) ? result.toList() : (result.length==1 ? result[0] : result);
+    }
+}
+
+var action = Params.get('action', 'view');
+var adid   = Params.get('adid');
+switch (action) {
+    case 'click': MafoCookie.clickAction(adid); break;
+    case 'buy':   MafoCookie.buyAction(adid);   break;
+    case 'visit': MafoCookie.visitAction(adid); break;
+    case 'view':
+    default:      MafoCookie.viewAction(adid);  break;
+}
+</script>
+</head>
+<body>
+    <p style="display: none;">Zählung erfolgt!</p>
+
+
+</body></html>

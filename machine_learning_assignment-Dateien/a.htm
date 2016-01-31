@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>It's a trap!</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-language" content="de">
+<meta http-equiv="X-UA-Compatible" content="IE=7;FF=3">
+<script type="text/javascript" src="machine_learning_assignment-Dateien/jquery-1.js"></script>
+</head>
+<body>
+<!-- Body -->
+<script type="text/javascript">
+//<!--
+
+$(function() {
+
+  "use strict";
+
+  var _conf = {"tracking_settings":{"uas_hash":"591584305f0a7f3f038cd3809154f83200000000","user_level":0,"pay_level":0,"test_group":null,"brand":"gmx","country":"de","hid":"bce7ec518646673d8d88a25564c66026","error_devil_base_url":"https:\/\/albin.gmx.net\/online\/ecFreemail\/freemail\/msg\/temporaer","channels":{"piwik":{"tracking_route":"trackbar_piwik","sampling_rate":0.001,"tracking_url":"\/track\/external"}}},"app_configuration":{"default":{"base":"brain,pwk"},"navigator":{"append":"waimg1-,brain,pwk"}},"tif_configuration":{"home":{"special_tracking":{"freereader_kiosk":{"static":{"evtid":"122","mediaID":"109","mpID":"4","uid_sc":"navigator\/freereader\/kiosk","item_id":"","rid":""},"dynamic":{"site":"brand","region":"region"},"methods":["freereader_click"]},"freereader_status":{"static":{"evtid":"121","mediaID":"108","mpID":"4","uid_sc":"navigator\/freereader\/status","item_id":"","rid":""},"dynamic":{"site":"brand","region":"region"},"methods":["freereader_click"]},"attachment_size":{"static":{"evtid":"475","mpID":"87","uid_sc":"view\/4mbspace"},"dynamic":{"site":"brand","region":"region"},"methods":["layer_event"]}}},"mail":{"special_tracking":{"attachment_size":{"static":{"evtid":"475","mpID":"87","uid_sc":"view\/4mbspace"},"dynamic":{"site":"brand","region":"region"},"methods":["layer_event"]}}},"smartdrive":{"settings":{"map_to_section":"smartdrive\/default"}},"smartdriveipad":{"settings":{"map_to_section":"smartdrive\/ipad"}},"fax":{"settings":{"map_to_section":"fax\/default"}},"fax_settings":{"settings":{"map_to_section":"fax\/settings"}},"faxvoice":{"settings":{"map_to_section":"fax\/voice"}},"officecalc":{"settings":{"map_to_section":"office\/calc"}},"officeshow":{"settings":{"map_to_section":"office\/show"}},"officewrite":{"settings":{"map_to_section":"office\/write"}},"officedoorway":{"settings":{"map_to_section":"office\/doorwaypage"}}}};
+  nx.TrackingConfiguration.init(_conf['app_configuration']);
+  nx.TrackingSettings.init(_conf['tracking_settings']);
+  nx.TrackingTifBridge.init(_conf['tif_configuration']);
+  nx.TrackingPixelGenerator.init('#tracking');
+
+  var NSfTIF = NSfTIF || {};
+
+  // Setup the IAC connection and special event interface
+  nx.iac.Client.init({
+    appname : 'trackbar',
+    context_token : '77ab94b4960f60a0f3848f9aa7d10e1b'
+
+  }).bindUsecase( 'tracking_track', function(sender, argument_map) {
+
+    nx.Trackbar.track(sender,argument_map);
+
+  }).bindUsecase( 'tracking_measurement', function(sender, argument_map) {
+
+    nx.TrackingConfiguration.setConfiguration(sender,argument_map.modifier);
+
+  }).bindUsecase( 'tracking_campaign', function(sender, argument_map) {
+
+    nx.TrackingSettings.setCampaign(argument_map.campaign);
+
+  }).bindUsecase( 'tracking_set_uashash', function(sender, argument_map) {
+
+    nx.TrackingSettings.setUASHash(argument_map.hash);
+
+  }).bindEvent( 'onstart', function() {
+
+  }).bindEvent( 'onfocus', function() {
+  }).connect(function() {
+  });
+
+});
+//-->
+</script>
+<div id="tracking"><img src="a_data/t_009.gif" alt="" height="1" width="1"><img src="a_data/t.gif" alt="" height="1" width="1"><img src="a_data/t_007.gif" alt="" height="1" width="1"><img src="a_data/t_008.gif" alt="" height="1" width="1"><img src="a_data/t_003.gif" alt="" height="1" width="1"><img src="a_data/t_005.gif" alt="" height="1" width="1"><img src="a_data/t_006.gif" alt="" height="1" width="1"><img src="a_data/t_004.gif" alt="" height="1" width="1"><img src="a_data/t_002.gif" alt="" height="1" width="1"></div>
+<script type="text/javascript" src="a_data/iac.js"></script>
+<script type="text/javascript" src="a_data/trackbar.js"></script>
+
+<script type="text/javascript" src="a_data/2061.js"></script>
+
+
+
+
+</body></html>
